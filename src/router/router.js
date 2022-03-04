@@ -17,4 +17,10 @@ router.get("/singlemessage/:id", getAMessage);
 router.put("/updatemessage/:id", messageValidator, updateMessage);
 router.delete("/deletemessage/:id", deleteMessage);
 
+// Router for Blog
+router.get("/blog");
+router.post("/blog/create");
+router.get("/blog/:id");
+router.put("/blogUpdate/:id");
+router.delete("/blogDelete/:id");
 export default router;

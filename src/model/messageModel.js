@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const messageSchema = new Schema({
   name: String,
-  email: String,
+  email: { type: String, trim: true },
   message: String,
-  date: Date,
+  createDate: Date,
 });
 export default new mongoose.model("messageSchema", messageSchema);

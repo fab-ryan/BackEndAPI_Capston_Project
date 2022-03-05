@@ -1,4 +1,5 @@
 import messageModel from "../model/messageModel.js";
+
 const getAllMessage = async (req, res) => {
   try {
     const allMessages = await messageModel.find({});
@@ -55,7 +56,7 @@ const updateMessage = async (req, res) => {
 const deleteMessage = async (req, res) => {
   const messageId = req.params.id;
   const DeleteResults = await messageModel.findByIdAndDelete(messageId);
-  res.status(200).json({
+  res.status(201).json({
     message: `Message has been Delete well`,
   });
 };

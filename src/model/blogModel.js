@@ -9,6 +9,12 @@ const blogSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "commentSchema",
+    },
+  ],
 });
 
 export default new mongoose.model("blogSchema", blogSchema);

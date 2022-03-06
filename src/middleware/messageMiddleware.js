@@ -11,7 +11,7 @@ const messageValidator = (req, res, next) => {
     });
   }
   if (message == "") {
-    return res.status(404).json({
+    return res.json({
       error: "Message is Required",
     });
   }

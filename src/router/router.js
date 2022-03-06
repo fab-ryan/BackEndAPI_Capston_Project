@@ -16,7 +16,11 @@ import {
   deleteBlog,
 } from "../controller/BlogController.js";
 import userValidator from "../middleware/userMiddleware.js";
-
+import commentValidator from "../middleware/commentMiddleware.js";
+import {
+  getAllComment,
+  postAllComment,
+} from "../controller/commentController.js";
 import {
   deleteUser,
   getAllUser,
@@ -40,10 +44,16 @@ router.get("/blog/:id", getOneBlog);
 router.patch("/blog/:id", blogValidate, updateBlog);
 router.delete("/blog/:id", deleteBlog);
 
+// Router for Comment on blog
+
+router.post("/blog/:id/comment", commentValidator, postAllComment);
+router.get("/blog/:id/comment", getAllComment);
+
 // Router for User
 router.get("/user", getAllUser);
 router.post("/user", userValidator, postUser);
 router.get("/user/:id", getOneUser);
 router.patch("/user/:id", userValidator, updateUser);
 router.delete("/user/:id", deleteUser);
+
 export default router;

@@ -1,5 +1,5 @@
 import blogeModel from "../model/blogModel.js";
-
+//  this is the comment
 const postAllBlog = async (req, res) => {
   try {
     const blogs = await blogeModel.create(req.body);

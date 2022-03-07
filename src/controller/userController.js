@@ -57,7 +57,15 @@ const getOneUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const userId = req.params.id;
-    const UpdateUser = await userSchema.findByIdAndUpdate(userId, req.body);
+    const hashPassword = bcrypt.hashSync(req.body.password, 10);
+
+    const UpdateUser = await userSchema.findByIdAndUpdate(userId, {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      username: req.body.username,
+      password: hashPassword,
+    });
     res.status(201).json({
       message: "User Updated well",
     });

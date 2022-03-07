@@ -5,6 +5,7 @@ const getAllMessage = async (req, res) => {
     const allMessages = await messageModel.find({});
     res.status(200).json({
       message: `Data retrived`,
+      count: allMessages.length,
       data: allMessages,
     });
   } catch (error) {

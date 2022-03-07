@@ -9,6 +9,7 @@ const commentSchema = new Schema({
   email: {
     type: String,
     trim: true,
+    lowercase: true,
     required: [true, "field is required"],
   },
   comment: {

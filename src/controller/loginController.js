@@ -8,6 +8,7 @@ const LoginUser = async (req, res) => {
     if (userFound) {
       bcrypt.compare(password, userFound.password, function (error, user) {
         if (error) {
+          console.log(error);
           res.json({
             message: "incorrect password",
           });
@@ -15,6 +16,10 @@ const LoginUser = async (req, res) => {
         if (user) {
           res.json({
             message: `welcome ${userFound.username}`,
+          });
+        } else {
+          res.json({
+            error: `Incorrect Password`,
           });
         }
       });

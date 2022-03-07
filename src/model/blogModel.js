@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import commentModel from "./commentModel.js";
 const Schema = mongoose.Schema;
 const blogSchema = new Schema({
   ArticleTitle: { type: String, required: [true, "field required"] },

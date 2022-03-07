@@ -35,4 +35,5 @@ const getAllComment = async (req, res) => {
     console.log(error);
   }
 };
+
 export { postAllComment, getAllComment };

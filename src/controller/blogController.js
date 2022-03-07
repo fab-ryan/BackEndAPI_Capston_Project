@@ -1,4 +1,6 @@
 import blogeModel from "../model/blogModel.js";
+import commentModel from "../model/commentModel.js";
+
 //  this is the comment
 const postAllBlog = async (req, res) => {
   try {
@@ -54,10 +56,13 @@ const deleteBlog = async (req, res) => {
   try {
     const blogId = req.params.id;
     const DeleteBlog = await blogeModel.findByIdAndDelete(blogId);
+    const commentdel = await commentModel.deleteMany({ blogPost: blogId });
     res.status(200).json({
       message: "Blog Delete",
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export { postAllBlog, getAllBlog, getOneBlog, updateBlog, deleteBlog };

@@ -28,6 +28,7 @@ import {
   postUser,
   updateUser,
 } from "../controller/userController.js";
+import { LoginUser } from "../controller/loginController.js";
 
 const router = express.Router();
 // Router For Question and Message
@@ -55,5 +56,9 @@ router.post("/user", userValidator, postUser);
 router.get("/user/:id", getOneUser);
 router.patch("/user/:id", userValidator, updateUser);
 router.delete("/user/:id", deleteUser);
+
+//Router for login
+
+router.post("/login", LoginUser);
 
 export default router;

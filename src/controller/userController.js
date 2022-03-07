@@ -1,5 +1,5 @@
+import bcrypt from "bcrypt";
 import userSchema from "../model/userModel.js";
-
 const postUser = async (req, res) => {
   try {
     const { email } = req.body;
@@ -9,7 +9,15 @@ const postUser = async (req, res) => {
         error: `User with this email ${email} is exists`,
       });
     } else {
-      const NewUser = await userSchema.create(req.body);
+      const hashPassword = bcrypt.hashSync(req.body.password, 10);
+      const NewUser = await userSchema.create({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        username: req.body.username,
+        password: hashPassword,
+      });
+
       res.status(201).json({
         message: "successfully",
         data: NewUser,

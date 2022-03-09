@@ -6,4 +6,4 @@ const messageSchema = new Schema({
   message: String,
   createDate: Date,
 });
-export default new mongoose.model("messageSchema", messageSchema);
+export default new mongoose.model("Messages", messageSchema);

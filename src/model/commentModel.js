@@ -22,7 +22,7 @@ const commentSchema = new Schema({
   },
   blogPost: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "blogSchema",
+    ref: "Blogs",
   },
 });
-export default new mongoose.model("commentSchema", commentSchema);
+export default new mongoose.model("Comments", commentSchema);

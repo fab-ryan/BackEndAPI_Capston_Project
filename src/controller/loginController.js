@@ -1,5 +1,6 @@
 import userModel from "../model/userModel.js";
 import bcrypt from "bcrypt";
+import { signToken } from "../middleware/auth.js";
 
 const LoginUser = async (req, res) => {
   try {
@@ -9,16 +10,21 @@ const LoginUser = async (req, res) => {
       bcrypt.compare(password, userFound.password, function (error, user) {
         if (error) {
           console.log(error);
-          res.json({
-            message: "incorrect password",
+          res.status(500).json({
+            error: " Internal Server ",
           });
         }
         if (user) {
+          const token = signToken({
+            userId: userFound.id,
+            role: userFound.role,
+          });
           res.json({
             message: `welcome ${userFound.username}`,
+            token,
           });
         } else {
-          res.json({
+          res.status(401).json({
             error: `Incorrect Password`,
           });
         }

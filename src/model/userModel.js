@@ -13,11 +13,11 @@ const userSchema = new Schema({
   },
   password: { type: String, required: [true, "field required"] },
 
-  user_type: { type: String, default: "user" },
+  role: { type: String, default: "user" },
   created_at: {
     type: Date,
     default: Date.now(),
   },
 });
 
-export default new mongoose.model("userSchema", userSchema);
+export default new mongoose.model("Users", userSchema);

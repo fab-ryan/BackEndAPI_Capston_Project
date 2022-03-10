@@ -30,6 +30,7 @@ import {
 } from "../controller/userController.js";
 import { LoginUser } from "../controller/loginController.js";
 import { verifyToken, IsAdmin } from "../middleware/is_auth.js";
+import { logout } from "../controller/logoutController.js";
 
 const router = express.Router();
 // Router For Question and Message
@@ -61,5 +62,6 @@ router.delete("/user/:id", verifyToken, IsAdmin, deleteUser);
 //Router for login
 
 router.post("/login", LoginUser);
+router.post("/logout", logout);
 
 export default router;

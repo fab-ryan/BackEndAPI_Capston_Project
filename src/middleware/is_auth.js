@@ -15,7 +15,6 @@ const verifyToken = (req, res, next) => {
 
 const IsAdmin = (req, res, next) => {
   const user = req.user;
-  console.log(user);
 
   if (user.role == "admin") return next();
   return res.status(401).json({

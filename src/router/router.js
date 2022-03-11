@@ -18,6 +18,7 @@ import {
 import userValidator from "../validator/userValidator.js";
 import commentValidator from "../Validator/commentValidator.js";
 import {
+  deleteComment,
   getAllComment,
   postAllComment,
 } from "../controller/commentController.js";
@@ -51,7 +52,7 @@ router.delete("/blog/:id", verifyToken, IsAdmin, deleteBlog);
 
 router.post("/blog/:id/comment", verifyToken, commentValidator, postAllComment);
 router.get("/blog/:id/comment", getAllComment);
-
+router.delete("/blog/:blogId/comment/:commentId", deleteComment);
 // Router for User
 router.get("/user", verifyToken, IsAdmin, getAllUser);
 router.post("/user", userValidator, postUser);

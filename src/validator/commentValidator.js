@@ -1,17 +1,17 @@
 const commentValidator = (req, res, next) => {
   let { fullname, email, comment } = req.body;
   if (fullname == "" || !fullname) {
-    res.json({
+    res.status(204).json({
       error: "full Name required",
     });
   }
   if (email == "" || !email) {
-    res.json({
+    res.status(204).json({
       error: "email is required",
     });
   }
   if (!email.includes("@") || !email.includes(".")) {
-    return res.json({
+    return res.status(204).json({
       error: "The email is Incomplete",
     });
   }

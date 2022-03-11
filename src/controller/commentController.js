@@ -19,7 +19,9 @@ const postAllComment = async (req, res) => {
       });
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal server error",
+    });
   }
 };
 
@@ -29,11 +31,38 @@ const getAllComment = async (req, res) => {
     const getComment = await blogModel.findById(BlogId).populate("comments");
     res.status(200).json({
       message: "All Comments",
+      counte: getComment.comments.length,
       data: getComment.comments,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal server error",
+    });
+  }
+};
+const deleteComment = async (req, res) => {
+  const blogId = req.params.blogId;
+  const commentId = req.params.commentId;
+  try {
+    const deleteComment = await commentModel.findById(commentId);
+    if (deleteComment) {
+      const dele = await commentModel.findByIdAndDelete(commentId);
+      const blog = await blogModel.findById(blogId);
+      blog.comments.remove(commentId);
+      await blog.save();
+      res.status(200).json({
+        message: "comment has been deleted well",
+      });
+    } else {
+      res.status(400).json({
+        error: `no comment found with this id ${commentId}`,
+      });
+    }
+  } catch (error) {
+    res.status(404).json({
+      error: "No comment found",
+    });
   }
 };
 
-export { postAllComment, getAllComment };
+export { postAllComment, getAllComment, deleteComment };

@@ -5,7 +5,7 @@ const postUser = async (req, res) => {
     const { email } = req.body;
     const userexist = await userSchema.find({ email: email.toLowerCase() });
     if (userexist.length) {
-      res.json({
+      res.status(400).json({
         error: `User with this email ${email} is exists`,
       });
     } else {
@@ -19,12 +19,14 @@ const postUser = async (req, res) => {
       });
 
       res.status(201).json({
-        message: "successfully",
+        message: "user Created successfully",
         data: NewUser,
       });
     }
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal server error",
+    });
   }
 };
 
@@ -70,7 +72,7 @@ const updateUser = async (req, res) => {
       message: "User Updated well",
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 

@@ -14,7 +14,7 @@ import {
   getOneBlog,
   updateBlog,
   deleteBlog,
-} from "../controller/BlogController.js";
+} from "../controller/blogController.js";
 import userValidator from "../validator/userValidator.js";
 import commentValidator from "../Validator/commentValidator.js";
 import {

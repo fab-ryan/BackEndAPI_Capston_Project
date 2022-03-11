@@ -36,7 +36,7 @@ import { logout } from "../controller/logoutController.js";
 const router = express.Router();
 // Router For Question and Message
 router.get("/messages", verifyToken, IsAdmin, getAllMessage);
-router.post("/messages/create", messageValidator, postAllMessage);
+router.post("/messages/create", verifyToken, messageValidator, postAllMessage);
 router.get("/singlemessage/:id", getAMessage);
 router.patch("/updatemessage/:id", messageValidator, updateMessage);
 router.delete("/deletemessage/:id", verifyToken, IsAdmin, deleteMessage);

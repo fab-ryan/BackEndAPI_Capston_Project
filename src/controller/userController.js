@@ -39,7 +39,9 @@ const getAllUser = async (req, res) => {
       data: allUser,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal Server error",
+    });
   }
 };
 
@@ -52,7 +54,9 @@ const getOneUser = async (req, res) => {
       data: OneUser,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal Server error",
+    });
   }
 };
 
@@ -84,7 +88,9 @@ const deleteUser = async (req, res) => {
       message: "User Deleted succefully",
     });
   } catch (error) {
-    console.log(error);
+     res.status(500).json({
+       error: "Internal Server error",
+     });
   }
 };
 

@@ -7,6 +7,7 @@ const verifyToken = (req, res, next) => {
   if (!token) {
     return res.status(403).json({ message: "you need to login first" });
   }
+
   const user = jwt.verify(token, private_key);
   req.user = user;
 

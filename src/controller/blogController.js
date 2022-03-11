@@ -10,7 +10,9 @@ const postAllBlog = async (req, res) => {
       data: blogs,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal Server error",
+    });
   }
 };
 const getAllBlog = async (req, res) => {
@@ -22,7 +24,9 @@ const getAllBlog = async (req, res) => {
       data: Allblogs,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal Server error",
+    });
   }
 };
 
@@ -35,7 +39,9 @@ const getOneBlog = async (req, res) => {
       data: OneBlog,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal Server error",
+    });
   }
 };
 
@@ -48,20 +54,28 @@ const updateBlog = async (req, res) => {
       data: UpdateBlog,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal Server error",
+    });
   }
 };
 
 const deleteBlog = async (req, res) => {
   try {
     const blogId = req.params.id;
-    const DeleteBlog = await blogeModel.findByIdAndDelete(blogId);
-    const commentdel = await commentModel.deleteMany({ blogPost: blogId });
-    res.status(200).json({
-      message: "Blog Delete",
-    });
+    const blog = await blogeModel.findById(blogId);
+    if (blog) {
+      const DeleteBlog = await blogeModel.findByIdAndDelete(blogId);
+      const commentdel = await commentModel.deleteMany({ blogPost: blogId });
+      res.status(200).json({
+        message: "Blog Delete",
+      });
+    }
+    res.status(404).json({ error: "Blog Id not found" });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal Server error",
+    });
   }
 };
 

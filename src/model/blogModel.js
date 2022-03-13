@@ -6,6 +6,8 @@ const blogSchema = new Schema({
   ArticlePreview: { type: String },
   ArticleImage: { data: Buffer, contentType: String },
   ArticleDescription: { type: String },
+  slug: { type: String, required: true },
+  author: { type: String, required: true },
   created_at: {
     type: Date,
     default: Date.now(),

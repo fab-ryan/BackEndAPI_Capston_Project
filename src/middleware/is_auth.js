@@ -11,6 +11,7 @@ const verifyToken = (req, res, next) => {
     try {
       const user = jwt.verify(token, private_key);
       req.user = user;
+
       next();
     } catch (error) {
       res.status(400).json({ error: "Invalid token Login Again" });

@@ -13,7 +13,7 @@ const userSchema = new Schema({
   },
   password: { type: String, required: [true, "field required"] },
 
-  role: { type: String, default: "user" },
+  role: { type: String, default: "user", enum: ["user", "admin"] },
   created_at: {
     type: Date,
     default: Date.now(),

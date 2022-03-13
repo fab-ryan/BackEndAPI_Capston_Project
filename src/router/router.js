@@ -7,7 +7,7 @@ import messageRouter from "./messageRouter.js";
 const routers = express();
 routers.use("/api/v1/", userRouter);
 routers.use("/api/v1/", loginRouter);
-routers.use("/api/v1/", commentRouter);
+routers.use("/api/v1", commentRouter);
 routers.use("/api/v1/", blogRouter);
 routers.use("/api/v1/", messageRouter);
 export default routers;

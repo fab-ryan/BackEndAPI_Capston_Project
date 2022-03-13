@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import userModel from "../model/userModel.js";
 import userSchema from "../model/userModel.js";
 const postUser = async (req, res) => {
   try {
@@ -67,7 +66,7 @@ const updateUser = async (req, res) => {
   try {
     const userId = req.params.id;
     const hashPassword = bcrypt.hashSync(req.body.password, 10);
-    if (!(await userModel.findById(userId)))
+    if (!(await userSchema.findById(userId)))
       return res
         .status(409)
         .json({ error: `user with this not found ${userId}` });
@@ -85,7 +84,25 @@ const updateUser = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
+const changePassword = async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const userFound = await userSchema.findById(req.user.userId);
+  if (userFound) {
+    const current = bcrypt.compareSync(currentPassword, userFound.password);
+    if (current == true) {
+      const hashPassword = bcrypt.hashSync(req.body.newPassword, 10);
+      const UpdateUser = await userSchema.findByIdAndUpdate(req.user.userId, {
+        password: hashPassword,
+      });
+      res.status(201).json({
+        message: `Password Changed successfuly`,
+      });
+    }
+    else{
+      res.status(409).json({error:`Incorrect Current Password`})
+    }
+  }
+};
 const deleteUser = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -102,4 +119,11 @@ const deleteUser = async (req, res) => {
   }
 };
 
-export { postUser, getAllUser, getOneUser, updateUser, deleteUser };
+export {
+  postUser,
+  getAllUser,
+  getOneUser,
+  updateUser,
+  deleteUser,
+  changePassword,
+};

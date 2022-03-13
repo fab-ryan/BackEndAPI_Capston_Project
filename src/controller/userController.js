@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import userModel from "../model/userModel.js";
 import userSchema from "../model/userModel.js";
 const postUser = async (req, res) => {
   try {
@@ -49,6 +50,8 @@ const getOneUser = async (req, res) => {
   try {
     const userId = req.params.id;
     const OneUser = await userSchema.findById(userId);
+    if (!OneUser)
+      return res.status(404).json({ error: `no user with this Id ${userId}` });
     res.status(200).json({
       message: "User retrevied well",
       data: OneUser,
@@ -64,7 +67,10 @@ const updateUser = async (req, res) => {
   try {
     const userId = req.params.id;
     const hashPassword = bcrypt.hashSync(req.body.password, 10);
-
+    if (!(await userModel.findById(userId)))
+      return res
+        .status(409)
+        .json({ error: `user with this not found ${userId}` });
     const UpdateUser = await userSchema.findByIdAndUpdate(userId, {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
@@ -83,14 +89,16 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const userId = req.params.id;
+    if (!(await userSchema.findById(userId)))
+      return res.status(404).json({ error: `user not found ${userId}` });
     const DeleteUser = await userSchema.findByIdAndDelete(userId);
     res.status(200).json({
       message: "User Deleted succefully",
     });
   } catch (error) {
-     res.status(500).json({
-       error: "Internal Server error",
-     });
+    res.status(500).json({
+      error: "Internal Server error",
+    });
   }
 };
 

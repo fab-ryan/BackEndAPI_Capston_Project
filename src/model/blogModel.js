@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
-import commentModel from "./commentModel.js";
+
 const Schema = mongoose.Schema;
 const blogSchema = new Schema({
   ArticleTitle: { type: String },
   ArticlePreview: { type: String },
-  ArticleImage: { type: String },
+  ArticleImage: { data: Buffer, contentType: String },
   ArticleDescription: { type: String },
   created_at: {
     type: Date,

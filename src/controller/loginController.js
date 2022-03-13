@@ -34,7 +34,11 @@ const LoginUser = async (req, res) => {
         error: "User not Found",
       });
     }
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({
+      error: "Internal Server error",
+    });
+  }
 };
 
 export { LoginUser };

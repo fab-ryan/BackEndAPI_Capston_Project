@@ -9,7 +9,9 @@ const getAllMessage = async (req, res) => {
       data: allMessages,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal Server error",
+    });
   }
 };
 const postAllMessage = async (req, res) => {
@@ -26,7 +28,9 @@ const postAllMessage = async (req, res) => {
       data: SavedData,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal Server error",
+    });
   }
 };
 const getAMessage = async (req, res) => {
@@ -38,28 +42,42 @@ const getAMessage = async (req, res) => {
       data: Amessage,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      error: "Internal Server error",
+    });
   }
 };
 const updateMessage = async (req, res) => {
-  const messageId = req.params.id;
-  const UpdateStatus = await messageModel.findByIdAndUpdate(messageId, {
-    name: req.body.name,
-    email: req.body.email,
-    message: req.body.message,
-    date: Date.now(),
-  });
-  res.status(200).json({
-    message: `data has been update successfully`,
-    data: UpdateStatus,
-  });
+  try {
+    const messageId = req.params.id;
+    const UpdateStatus = await messageModel.findByIdAndUpdate(messageId, {
+      name: req.body.name,
+      email: req.body.email,
+      message: req.body.message,
+      date: Date.now(),
+    });
+    res.status(200).json({
+      message: `data has been update successfully`,
+      data: UpdateStatus,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Internal Server error",
+    });
+  }
 };
 const deleteMessage = async (req, res) => {
-  const messageId = req.params.id;
-  const DeleteResults = await messageModel.findByIdAndDelete(messageId);
-  res.status(201).json({
-    message: `Message has been Delete well`,
-  });
+  try {
+    const messageId = req.params.id;
+    const DeleteResults = await messageModel.findByIdAndDelete(messageId);
+    res.status(201).json({
+      message: `Message has been Delete well`,
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: "Internal Server error",
+    });
+  }
 };
 export {
   getAllMessage,

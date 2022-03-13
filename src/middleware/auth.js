@@ -3,7 +3,13 @@ import "dotenv/config";
 const private_key = process.env.PRIVATE_KEY;
 
 const signToken = (payload) => {
-  return jwt.sign(payload, private_key, { expiresIn: 60 * 600 });
+  try {
+    return jwt.sign(payload, private_key, { expiresIn: "1d" });
+  } catch (error) {
+    res.status(500).json({
+      error: "Internal server error",
+    });
+  }
 };
 
 export { signToken };

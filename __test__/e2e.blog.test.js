@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "../";
+import app from "../src";
 
 describe("Blog test", () => {
   describe("All Blogs", () => {

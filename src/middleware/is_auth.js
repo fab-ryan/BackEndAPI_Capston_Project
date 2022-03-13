@@ -3,19 +3,25 @@ import "dotenv/config";
 const private_key = process.env.PRIVATE_KEY;
 let token;
 const verifyToken = (req, res, next) => {
-  token = req.headers.authorization.split(" ")[1];
-  if (!token) {
-    return res.status(403).json({ message: "you need to login first" });
+  try {
+    token = req.headers.authorization.split(" ")[1];
+    if (!token) {
+      return res.status(403).json({ message: "you need to login first" });
+    }
+    try {
+      const user = jwt.verify(token, private_key);
+      req.user = user;
+      next();
+    } catch (error) {
+      res.status(400).json({ error: "Invalid token Login Again" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: "No token has provided" });
   }
-  const user = jwt.verify(token, private_key);
-  req.user = user;
-
-  next();
 };
 
 const IsAdmin = (req, res, next) => {
   const user = req.user;
-
   if (user.role == "admin") return next();
   return res.status(401).json({
     status: "fail",

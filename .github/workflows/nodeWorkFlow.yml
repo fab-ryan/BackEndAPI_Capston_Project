@@ -1,5 +1,5 @@
 name: Node js CI
-description: my caption project
+
 on:
   push:
     branches: [main]

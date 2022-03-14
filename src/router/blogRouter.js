@@ -29,8 +29,8 @@ router.post(
   "/blog",
   verifyToken,
   IsAdmin,
+  blogValidate,
   upload.single("image"),
-  //   blogValidate,
   postAllBlog
 );
 

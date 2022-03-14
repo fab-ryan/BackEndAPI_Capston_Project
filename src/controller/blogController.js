@@ -1,29 +1,39 @@
 import blogeModel from "../model/blogModel.js";
 import commentModel from "../model/commentModel.js";
 import { fileUpload } from "../middleware/mutler.js";
+import slug from "slug";
+import userModel from "../model/userModel.js";
 
 //  this is the comment
 const postAllBlog = async (req, res) => {
   try {
     const { ArticleTitle, ArticlePreview, ArticleImage, ArticleDescription } =
       req.body;
-    console.log(req.body);
-    if (req.file) {
-      req.body.ArticleImage = await fileUpload(req);
-    } else {
-      req.body.ArticleImage =
-        "https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260";
+    if (await blogeModel.findOne({ slug: slug(ArticleTitle) }))
+      res.status(400).json({
+        error: `This Blog Exist ${ArticleTitle}`,
+      });
+    else {
+      if (req.file) {
+        req.body.ArticleImage = await fileUpload(req);
+      } else {
+        req.body.ArticleImage =
+          "https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260";
+      }
+      const user = await userModel.findById(req.user.userId);
+      const blogs = await blogeModel.create({
+        ArticleTitle: ArticleTitle,
+        ArticlePreview: ArticlePreview,
+        ArticleImage: ArticleImage,
+        ArticleDescription: ArticleDescription,
+        slug: slug(ArticleTitle),
+        author: user.username,
+      });
+      res.status(201).json({
+        message: "Blog Has been saved succefull",
+        data: blogs,
+      });
     }
-    const blogs = await blogeModel.create({
-      ArticleTitle: ArticleTitle,
-      ArticlePreview: ArticlePreview,
-      ArticleImage: ArticleImage,
-      ArticleDescription: ArticleDescription,
-    });
-    res.status(201).json({
-      message: "Blog Has been saved succefull",
-      data: blogs,
-    });
   } catch (error) {
     res.status(500).json({
       error: `Internal ${error}`,
@@ -65,6 +75,10 @@ const getOneBlog = async (req, res) => {
 const updateBlog = async (req, res) => {
   try {
     const blogId = req.params.id;
+    if (!(await blogeModel.findById(blogId)))
+      return res
+        .status(404)
+        .json({ error: `no Blog found with this id ${blogId}` });
     const UpdateBlog = await blogeModel.findByIdAndUpdate(blogId, req.body);
     res.status(201).json({
       message: "Blog Update",

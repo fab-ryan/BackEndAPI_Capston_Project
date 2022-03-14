@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const blogSchema = new Schema({
   ArticleTitle: { type: String },
   ArticlePreview: { type: String },
-  ArticleImage: { data: Buffer, contentType: String },
+  ArticleImage: { type: String, contentType: String },
   ArticleDescription: { type: String },
   slug: { type: String, required: true },
   author: { type: String, required: true },

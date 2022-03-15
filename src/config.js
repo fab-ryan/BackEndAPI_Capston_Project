@@ -2,7 +2,7 @@ import dontenv from "dotenv";
 dontenv.config();
 const config = {
   development: {
-    port: process.env.PORT,
+    port: process.env.DEV_PORT,
     db: process.env.DEV_DB_URL,
     secret: process.env.PRIVATE_KEY,
     mail: process.env.API_GRID_API,

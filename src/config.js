@@ -14,7 +14,7 @@ const config = {
     mail: process.env.API_GRID_API,
   },
   production: {
-    port: process.env.PROD_PORT,
+    port: process.env.PORT,
     db: process.env.PROD_DB_URL,
     secret: process.env.PRIVATE_KEY,
     mail: process.env.API_GRID_API,

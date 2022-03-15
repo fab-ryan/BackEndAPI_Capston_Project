@@ -19,10 +19,11 @@ const postUser = async (req, res) => {
         username: req.body.username,
         password: hashPassword,
       });
-
+      const token = signToken({ userId: NewUser.id, role: NewUser.role });
       res.status(201).json({
         message: "user Created successfully",
         data: NewUser,
+        token,
       });
     }
   } catch (error) {

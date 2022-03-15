@@ -1,13 +1,13 @@
-import dontenv from "dotenv";
+import config from "../config.js";
 import sgMail from "@sendgrid/mail";
 import subscriberModel from "../model/subscriberModel.js";
 const sendUserEmail = async (req, res, next) => {
-  dontenv.config();
+  const { main } = config;
   const EmailFound = await subscriberModel.findOne({ email: req.body.email });
   if (EmailFound) {
     res.status(400).json({ error: `The Email ${req.body.email}` });
   } else {
-    sgMail.setApiKey(process.env.API_SEND_GRID_API);
+    sgMail.setApiKey(main);
 
     const mailOption = {
       to: req.body.email,

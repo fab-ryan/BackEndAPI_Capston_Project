@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import "dotenv/config";
-const private_key = process.env.PRIVATE_KEY;
+import config from "../config.js";
+const private_key = config.secret;
 
 const signToken = (payload) => {
   try {

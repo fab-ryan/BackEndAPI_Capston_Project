@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt";
 import userSchema from "../model/userModel.js";
+import { signToken } from "../middleware/auth.js";
+
 const postUser = async (req, res) => {
   try {
     const { email } = req.body;
@@ -94,12 +96,13 @@ const changePassword = async (req, res) => {
       const UpdateUser = await userSchema.findByIdAndUpdate(req.user.userId, {
         password: hashPassword,
       });
+      const token = signToken({ userId: userFound.id, role: userFound.role });
       res.status(201).json({
         message: `Password Changed successfuly`,
+        token,
       });
-    }
-    else{
-      res.status(409).json({error:`Incorrect Current Password`})
+    } else {
+      res.status(409).json({ error: `Incorrect Current Password` });
     }
   }
 };

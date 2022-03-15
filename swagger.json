@@ -113,7 +113,7 @@
         }
       }
     },
-    "/messages": {
+    "/message": {
       "post": {
         "tags": [
           "Messages"

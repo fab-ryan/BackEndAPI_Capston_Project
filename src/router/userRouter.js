@@ -5,7 +5,7 @@ import {
   getAllUser,
   getOneUser,
   postUser,
-  updateUser,
+  updateUser, 
 } from "../controller/userController.js";
 import userValidator from "../validator/userValidator.js";
 import { verifyToken, IsAdmin } from "../middleware/is_auth.js";

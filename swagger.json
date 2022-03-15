@@ -16,14 +16,8 @@
       "in": "header"
     }
   },
-  "host": "localhost:3000",
+  "host": "https://my-brand-api-fabrice.herokuapp.com",
   "basePath": "/api/v1/",
-  "servers": [
-    {
-      "url": "http://localhost:3000",
-      "name": "DEV"
-    }
-  ],
   "paths": {
     "/user": {
       "post": {

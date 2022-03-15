@@ -5,7 +5,8 @@ import {
   getAllUser,
   getOneUser,
   postUser,
-  updateUser, 
+  updateUser,
+  getUserInfo,
 } from "../controller/userController.js";
 import userValidator from "../validator/userValidator.js";
 import { verifyToken, IsAdmin } from "../middleware/is_auth.js";
@@ -17,6 +18,7 @@ router.post("/user", userValidator, postUser);
 router.get("/user/:id", verifyToken, getOneUser);
 router.patch("/user/:id", verifyToken, userValidator, updateUser);
 router.delete("/user/:id", verifyToken, IsAdmin, deleteUser);
+router.get("/userInfo", verifyToken, getUserInfo);
 
 router.patch("/changepassword", verifyToken, changePassword);
 

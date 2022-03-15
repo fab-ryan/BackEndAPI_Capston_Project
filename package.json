@@ -12,8 +12,10 @@
   "author": "fabrice",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.6.2",
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.28.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
@@ -21,7 +23,8 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
     "slug": "^5.3.0",
-    "supertest": "^6.2.2"
+    "supertest": "^6.2.2",
+    "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
     "jest": "^27.5.1",

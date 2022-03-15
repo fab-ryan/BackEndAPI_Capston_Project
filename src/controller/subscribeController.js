@@ -1,5 +1,4 @@
 import subscriberModel from "../model/subscriberModel.js";
-
 const postSubscriber = async (req, res) => {
   try {
     const subs = await subscriberModel.findOne({ email: req.body.email });

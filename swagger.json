@@ -16,7 +16,7 @@
       "in": "header"
     }
   },
-  "host": "https://my-brand-api-fabrice.herokuapp.com",
+  "host": "my-brand-api-fabrice.herokuapp.com",
   "basePath": "/api/v1/",
   "paths": {
     "/user": {

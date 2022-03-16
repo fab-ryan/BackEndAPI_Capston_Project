@@ -18,6 +18,7 @@ const postUser = async (req, res) => {
         email: req.body.email,
         username: req.body.username,
         password: hashPassword,
+        role: req.body.role,
       });
       const token = signToken({ userId: NewUser.id, role: NewUser.role });
       res.status(201).json({
@@ -68,7 +69,6 @@ const getOneUser = async (req, res) => {
 const getUserInfo = async (req, res) => {
   const userId = req.user.userId;
   try {
-    console.log(userId);
     const OneUser = await userSchema.findOne({ _id: userId });
     if (!OneUser)
       return res.status(404).json({ error: `no user with this Id ${userId}` });

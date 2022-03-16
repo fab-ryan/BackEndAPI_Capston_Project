@@ -21,6 +21,7 @@ const LoginUser = async (req, res) => {
           });
           res.status(201).json({
             message: `welcome ${userFound.username}`,
+            
             token,
           });
         } else {

@@ -9,7 +9,7 @@ const config = {
   },
   test: {
     port: process.env.TEST_PORT,
-    db: process.env.TEST_URL_TEST,
+    db: process.env.TEST_DB_URL,
     secret: process.env.PRIVATE_KEY,
     mail: process.env.API_GRID_API,
   },

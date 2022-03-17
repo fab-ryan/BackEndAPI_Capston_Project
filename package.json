@@ -5,7 +5,7 @@
   "main": "./server.js",
   "type": "module",
   "scripts": {
-    "test": "cross-env NODE_ENV=test nyc --reporter=text mocha --recursive --exit --timeout 30000 --require @babel/register",
+    "test": "cross-env NODE_ENV=test nyc --reporter=text mocha --recursive --exit --timeout 30000",
     "start": "node ./server.js",
     "dev": "nodemon ./server.js"
   },
@@ -26,10 +26,6 @@
     "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.7",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/register": "^7.17.7",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "coveralls": "^3.1.1",

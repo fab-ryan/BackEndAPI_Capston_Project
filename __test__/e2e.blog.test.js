@@ -5,7 +5,7 @@ describe("Blog test", () => {
   describe("All Blogs", () => {
     let user, res;
     test("All Blogs", async () => {
-      res = await request(app).get("/blog");
+      res = await request(app).get("/api/v1/blog");
       expect(res.status).toBe(200);
       expect(res.body.message).toContain("all Blogs");
     });

@@ -23,7 +23,13 @@ const getAllSubscriber = async (req, res) => {
     if (allSubscriber.length < 1) {
       res.status(406).json({ error: `No subscriber Listed` });
     } else {
-      res.status(200).json({ message: `successfully`, data: allSubscriber });
+      res
+        .status(200)
+        .json({
+          message: `successfully`,
+          data: allSubscriber,
+          count: allSubscriber.length,
+        });
     }
   } catch (error) {
     res.status(400).json({ error: `bad Request` });
@@ -55,4 +61,4 @@ const deleteSubscriber = async (req, res) => {
     res.status(500).json({ error: error });
   }
 };
-export { postSubscriber, getAllSubscriber, deleteSubscriber ,getOneSubscriber};
+export { postSubscriber, getAllSubscriber, deleteSubscriber, getOneSubscriber };

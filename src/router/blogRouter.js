@@ -9,28 +9,25 @@ import {
 import { blogValidate } from "../validator/blogValidator.js";
 import { verifyToken, IsAdmin } from "../middleware/is_auth.js";
 import multer from "multer";
-
 const router = express.Router();
-
-// const storage = multer.diskStorage({});
-// const fileFilter = (req, file, cb) => {
-//   if (file.mimetype.startsWith("image")) {
-//     cb(null, true);
-//   } else {
-//     cb("invalid image file!", false);
-//   }
-// };
-// const uploads = multer({ storage, fileFilter });
-
-const upload = multer({ dest: "uploads/" });
+const storage = multer.diskStorage({});
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb("invalid image file!", false);
+  }
+};
+const upload = multer({ storage, fileFilter });
 
 router.get("/blog", getAllBlog);
 router.post(
   "/blog",
   verifyToken,
   IsAdmin,
+  upload.single("ArticleImage"),
   blogValidate,
-  upload.single("image"),
+
   postAllBlog
 );
 

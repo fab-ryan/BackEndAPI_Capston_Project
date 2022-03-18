@@ -26,5 +26,5 @@ describe("Message Post", () => {
       .set("Authorization", "Bear " + token)
       .send(message);
     expect(res.status).toBe(201);
-  });
+  },50000);
 });

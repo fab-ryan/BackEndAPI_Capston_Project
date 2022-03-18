@@ -2,12 +2,12 @@ import config from "../config.js";
 import sgMail from "@sendgrid/mail";
 import subscriberModel from "../model/subscriberModel.js";
 const sendUserEmail = async (req, res, next) => {
-  const { main } = config;
+  const { mail } = config;
   const EmailFound = await subscriberModel.findOne({ email: req.body.email });
   if (EmailFound) {
     res.status(400).json({ error: `The Email ${req.body.email}` });
   } else {
-    sgMail.setApiKey(main);
+    sgMail.setApiKey(mail);
 
     const mailOption = {
       to: req.body.email,

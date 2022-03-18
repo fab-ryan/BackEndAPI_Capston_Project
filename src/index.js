@@ -9,15 +9,13 @@ const swaggerDoc = require("../swagger.json");
 import cors from "cors";
 const app = express();
 dbconnect;
-
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+app.use(router);
+app.use(morgan("dev"));
 app.use(
   "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(swaggerDoc, { extended: true })
 );
-app.use(morgan("dev"));
-app.use(router);
 export default app;

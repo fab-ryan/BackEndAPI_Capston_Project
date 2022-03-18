@@ -9,7 +9,7 @@ export const fileFilter = (req, file, cb) => {
 export const fileUpload = async (req) => {
   let imageUrl = "";
   await cloudinary.v2.uploader.upload(
-    re.file.path,
+    req.file.path,
     async function (err, image) {
       if (err) console.log(err);
       imageUrl = image.url;

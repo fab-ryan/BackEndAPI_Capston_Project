@@ -1,6 +1,5 @@
 const blogValidate = (req, res, next) => {
-  let { ArticleTitle, ArticlePreview, ArticleImage, ArticleDescription } =
-    req.body;
+  let { ArticleTitle, ArticlePreview, ArticleDescription } = req.body;
   if (ArticleTitle == "" || !ArticleTitle) {
     return res.status(409).json({
       error: "error Article Title required",
@@ -11,11 +10,7 @@ const blogValidate = (req, res, next) => {
       error: "error Articel Preview required",
     });
   }
-  if (ArticleImage == "" || !ArticleImage) {
-    return res.status(409).json({
-      error: "error Article Image required",
-    });
-  }
+
   if (ArticleDescription == "" || !ArticleDescription) {
     return res.status(409).json({
       error: "error Article Description",

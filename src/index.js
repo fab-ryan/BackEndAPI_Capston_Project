@@ -9,8 +9,8 @@ const swaggerDoc = require("../swagger.json");
 import cors from "cors";
 const app = express();
 dbconnect;
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 app.use(router);
 app.use(morgan("dev"));
 app.use(

@@ -12,6 +12,7 @@ const postAllBlog = async (req, res) => {
         error: `This Blog Exist ${ArticleTitle}`,
       });
     else {
+      console.log(req.body);
       const user = await userModel.findById(req.user.userId);
       req.body.ArticleImage = await fileUpload(req);
       const blogs = await blogeModel.create({

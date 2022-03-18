@@ -26,6 +26,7 @@ const postAllMessage = async (req, res) => {
     res.status(201).json({
       message: "Data saved successfully",
       data: SavedData,
+      
     });
   } catch (error) {
     res.status(500).json({

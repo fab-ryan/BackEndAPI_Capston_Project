@@ -42,12 +42,21 @@ const postAllBlog = async (req, res) => {
 };
 const getAllBlog = async (req, res) => {
   try {
-    const Allblogs = await blogeModel.find({});
-    res.status(200).json({
-      message: "all Blogs ",
-      counts: Allblogs.length,
-      data: Allblogs,
+    const Allblogs = await blogeModel.find({}).sort({
+      created_at: -1,
     });
+    if (!Allblogs) {
+      return res.status(404).json({
+        error: "No Blog Found",
+        counts: Allblogs.length,
+      });
+    } else {
+      res.status(200).json({
+        message: "all Blogs ",
+        counts: Allblogs.length,
+        data: Allblogs,
+      });
+    }
   } catch (error) {
     res.status(500).json({
       error: "Internal Server error",

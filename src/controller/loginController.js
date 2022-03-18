@@ -23,6 +23,7 @@ const LoginUser = async (req, res) => {
             message: `welcome ${userFound.username}`,
             role: userFound.role,
             token,
+            username: userFound.username,
           });
         } else {
           res.status(401).json({

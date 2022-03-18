@@ -45,8 +45,8 @@ const getAllBlog = async (req, res) => {
     const Allblogs = await blogeModel.find({}).sort({
       created_at: -1,
     });
-    if (!Allblogs) {
-      return res.status(404).json({
+    if (Allblogs.length < 1) {
+      res.status(404).json({
         error: "No Blog Found",
         counts: Allblogs.length,
       });

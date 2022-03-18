@@ -27,7 +27,7 @@ describe("user Test", () => {
 
     res = await request(app).post("/api/v1/user").send(user);
     expect(res.status).toBe(400);
-  });
+  }, 50000);
 
   it("it create user", async () => {
     user = {
@@ -41,12 +41,12 @@ describe("user Test", () => {
     res = await request(app).post("/api/v1/user").send(user);
     expect(res.statusCode).toEqual(201);
     expect(res.body.message).toContain("Created successfully");
-  });
+  }, 50000);
 
   it("Internal Server error", async () => {
     res = await request(app).post("/api/v1/user").send(user);
     expect(res.status).toBe(500);
-  });
+  }, 50000);
 
   describe("get All Users errors", () => {
     it("Get all useer", async () => {
@@ -57,6 +57,6 @@ describe("user Test", () => {
       expect(res.body.message).toContain(
         "You don't have permission to perform"
       );
-    });
+    }, 50000);
   });
 });

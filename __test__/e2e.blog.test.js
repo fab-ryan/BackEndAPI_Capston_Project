@@ -8,6 +8,6 @@ describe("Blog test", () => {
       res = await request(app).get("/api/v1/blog");
       expect(res.status).toBe(200);
       expect(res.body.message).toContain("all Blogs");
-    });
-  }, 5000);
+    }, 50000);
+  });
 });

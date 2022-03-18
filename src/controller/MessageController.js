@@ -2,12 +2,21 @@ import messageModel from "../model/messageModel.js";
 
 const getAllMessage = async (req, res) => {
   try {
-    const allMessages = await messageModel.find({});
-    res.status(200).json({
-      message: `Data retrived`,
-      count: allMessages.length,
-      data: allMessages,
+    const allMessages = await messageModel.find({}).sort({
+      createDate: -1,
     });
+    if (allMessages.length < 1) {
+      res.status(404).json({
+        error: "Not Message Found",
+        count: allMessages.length,
+      });
+    } else {
+      res.status(200).json({
+        message: `Data retrived`,
+        count: allMessages.length,
+        data: allMessages,
+      });
+    }
   } catch (error) {
     res.status(500).json({
       error: "Internal Server error",
@@ -26,7 +35,6 @@ const postAllMessage = async (req, res) => {
     res.status(201).json({
       message: "Data saved successfully",
       data: SavedData,
-      
     });
   } catch (error) {
     res.status(500).json({

@@ -1,30 +1,23 @@
 import blogeModel from "../model/blogModel.js";
 import commentModel from "../model/commentModel.js";
-import { fileUpload } from "../middleware/mutler.js";
 import slug from "slug";
 import userModel from "../model/userModel.js";
-
+import { fileUpload } from "../middleware/mutler.js";
 //  this is the comment
 const postAllBlog = async (req, res) => {
   try {
-    const { ArticleTitle, ArticlePreview, ArticleImage, ArticleDescription } =
-      req.body;
+    const { ArticleTitle, ArticlePreview, ArticleDescription } = req.body;
     if (await blogeModel.findOne({ slug: slug(ArticleTitle) }))
       res.status(400).json({
         error: `This Blog Exist ${ArticleTitle}`,
       });
     else {
-      if (req.file) {
-        req.body.ArticleImage = await fileUpload(req);
-      } else {
-        req.body.ArticleImage =
-          "https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260";
-      }
       const user = await userModel.findById(req.user.userId);
+      req.body.ArticleImage = await fileUpload(req);
       const blogs = await blogeModel.create({
         ArticleTitle: ArticleTitle,
         ArticlePreview: ArticlePreview,
-        ArticleImage: ArticleImage,
+        ArticleImage: req.body.ArticleImage,
         ArticleDescription: ArticleDescription,
         slug: slug(ArticleTitle),
         author: user.username,

@@ -12,7 +12,6 @@ const postAllBlog = async (req, res) => {
         error: `This Blog Exist ${ArticleTitle}`,
       });
     else {
-      console.log(req.body);
       const user = await userModel.findById(req.user.userId);
       req.body.ArticleImage = await fileUpload(req);
       const blogs = await blogeModel.create({
@@ -82,6 +81,7 @@ const updateBlog = async (req, res) => {
       return res
         .status(404)
         .json({ error: `no Blog found with this id ${blogId}` });
+    req.body.ArticleImage = await fileUpload(req);
     const UpdateBlog = await blogeModel.findByIdAndUpdate(blogId, req.body);
     res.status(201).json({
       message: "Blog Update",
@@ -89,7 +89,7 @@ const updateBlog = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      error: "Internal Server error",
+      error: `Internal Server error ${error}`,
     });
   }
 };

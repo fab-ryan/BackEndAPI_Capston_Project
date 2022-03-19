@@ -32,7 +32,14 @@ router.post(
 );
 
 router.get("/blog/:id", getOneBlog);
-router.patch("/blog/:id", verifyToken, IsAdmin, blogValidate, updateBlog);
+router.patch(
+  "/blog/:id",
+  verifyToken,
+  IsAdmin,
+  upload.single("ArticleImage"),
+  blogValidate,
+  updateBlog
+);
 router.delete("/blog/:id", verifyToken, IsAdmin, deleteBlog);
 
 export default router;

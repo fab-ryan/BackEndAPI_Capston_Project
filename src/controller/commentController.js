@@ -29,14 +29,15 @@ const getAllComment = async (req, res) => {
   try {
     const BlogId = req.params.id;
     const getComment = await blogModel.findById(BlogId).populate("comments");
+    if (!getComment) return res.status(404).json({ error: "No Comment Found" });
     res.status(200).json({
       message: "All Comments",
       counte: getComment.comments.length,
       data: getComment.comments,
     });
   } catch (error) {
-    res.status(500).json({
-      error: "Internal server error",
+    res.status(404).json({
+      error: `No Comments with this Id ${req.params.id}`,
     });
   }
 };

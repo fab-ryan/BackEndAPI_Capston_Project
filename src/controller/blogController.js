@@ -93,6 +93,24 @@ const updateBlog = async (req, res) => {
     });
   }
 };
+const updateBlogWithOutImg = async (req, res) => {
+  try {
+    const blogId = req.params.id;
+    if (!(await blogeModel.findById(blogId)))
+      return res
+        .status(404)
+        .json({ error: `no Blog found with this id ${blogId}` });
+    const UpdateBlog = await blogeModel.findByIdAndUpdate(blogId, req.body);
+    res.status(201).json({
+      message: "Blog Update",
+      data: UpdateBlog,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: `Internal Server error ${error}`,
+    });
+  }
+};
 
 const deleteBlog = async (req, res) => {
   try {
@@ -113,4 +131,11 @@ const deleteBlog = async (req, res) => {
   }
 };
 
-export { postAllBlog, getAllBlog, getOneBlog, updateBlog, deleteBlog };
+export {
+  postAllBlog,
+  getAllBlog,
+  getOneBlog,
+  updateBlog,
+  deleteBlog,
+  updateBlogWithOutImg,
+};

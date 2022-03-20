@@ -249,12 +249,7 @@
           "201": {
             "description": "Query Sent Successfully"
           }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        }
       },
       "post": {
         "tags": [

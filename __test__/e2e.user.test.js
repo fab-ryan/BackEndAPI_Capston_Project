@@ -3,11 +3,11 @@ import app from "../src/index";
 
 describe("user Test", () => {
   let token;
-  beforeAll(() => {
-    request(app)
+  beforeAll(async () => {
+    await request(app)
       .post("/api/v1/login")
       .send({
-        email: "jean@gmail.com",
+        email: "admin@gmail.com",
         password: "password",
       })
       .then((res) => {
@@ -41,6 +41,90 @@ describe("user Test", () => {
     res = await request(app).post("/api/v1/user").send(user);
     expect(res.statusCode).toEqual(201);
     expect(res.body.message).toContain("Created successfully");
+  }, 50000);
+  it("Email required", async () => {
+    user = {
+      firstname: "iradukunda",
+      lastname: "jean De dieu",
+      username: "dedsec",
+      password: "password",
+      confirmpassword: "password",
+      email: "",
+    };
+    res = await request(app).post("/api/v1/user").send(user);
+    expect(res.body.error).toContain("Email is required");
+  }, 50000);
+  it("first name required", async () => {
+    user = {
+      firstname: "",
+      lastname: "jean De dieu",
+      username: "dedsec",
+      password: "password",
+      confirmpassword: "password",
+      email: "test@gmail.com",
+    };
+    res = await request(app).post("/api/v1/user").send(user);
+    expect(res.body.error).toContain("First Name is required");
+  }, 50000);
+  it("lastname required", async () => {
+    user = {
+      firstname: "iradukunda",
+      lastname: "",
+      username: "dedsec",
+      password: "password",
+      confirmpassword: "password",
+      email: "test@gmail.com",
+    };
+    res = await request(app).post("/api/v1/user").send(user);
+    expect(res.body.error).toContain("Last Name is required");
+  }, 50000);
+  it("Username required", async () => {
+    user = {
+      firstname: "iradukunda",
+      lastname: "Jean",
+      username: "",
+      password: "password",
+      confirmpassword: "password",
+      email: "test@gmail.com",
+    };
+    res = await request(app).post("/api/v1/user").send(user);
+    expect(res.body.error).toContain("User Name is required");
+  }, 50000);
+  it("EmailValifa required", async () => {
+    user = {
+      firstname: "iradukunda",
+      lastname: "Jean",
+      username: "Desce",
+      password: "password",
+      confirmpassword: "password",
+      email: "testgmail",
+    };
+    res = await request(app).post("/api/v1/user").send(user);
+    expect(res.body.error).toContain("The email is Incomplete");
+  }, 50000);
+  it("password required", async () => {
+    user = {
+      firstname: "iradukunda",
+      lastname: "Jean",
+      username: "Desce",
+      password: "",
+      confirmpassword: "password",
+      email: "test@gmail.com",
+    };
+    res = await request(app).post("/api/v1/user").send(user);
+    expect(res.body.error).toContain("Password is Require");
+  }, 50000);
+  it("confim password required", async () => {
+    user = {
+      firstname: "iradukunda",
+      lastname: "Jean",
+      username: "Desce",
+      password: "password",
+      confirmpassword: "",
+      email: "test@gmail.com",
+    };
+    res = await request(app).post("/api/v1/user").send(user);
+    expect(res.body.error).toContain("Password is Require");
   }, 50000);
 
   it("Internal Server error", async () => {

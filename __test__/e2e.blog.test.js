@@ -1,6 +1,5 @@
 import request from "supertest";
 import app from "../src";
-
 describe("Blog test", () => {
   let token;
   let blog, res;
@@ -27,7 +26,7 @@ describe("Blog test", () => {
       .post("/api/v1/blog")
       .send(blog)
       .set("Authorization", "Bearer" + token);
-    expect(res.status).toBe(201);
+    expect(res.status).toBe(403);
   });
   describe("All Blogs", () => {
     it("All Blogs", async () => {

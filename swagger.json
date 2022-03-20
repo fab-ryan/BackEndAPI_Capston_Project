@@ -155,7 +155,9 @@
             "description": "Message Sent Successfully"
           }
         }
-      },
+      }
+    },
+    "/messages": {
       "get": {
         "tags": [
           "Messages"

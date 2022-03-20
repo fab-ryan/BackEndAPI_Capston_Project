@@ -11,11 +11,11 @@ const app = express();
 dbconnect;
 app.use(cors());
 app.use(express.json());
-app.use(router);
 app.use(morgan("dev"));
 app.use(
   "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(swaggerDoc, { extended: true })
 );
+app.use(router);
 export default app;

@@ -62,4 +62,43 @@ const userValidator = (req, res, next) => {
 
   next();
 };
-export default userValidator;
+const userUpdateValidate = (req, res, next) => {
+  let { firstname, lastname, username, password, confirmpassword, email } =
+    req.body;
+  if (firstname == "" || !firstname) {
+    res.json({
+      error: "First Name is required",
+    });
+  }
+  if (lastname == "" || !lastname) {
+    res.json({
+      error: "Last Name is required",
+    });
+  }
+  if (username == "" || !username) {
+    res.json({
+      error: "User Name is required ",
+    });
+  }
+  if (email == "" || !email) {
+    return res.json({
+      error: "Email is required",
+    });
+  }
+  if (!email.includes("@") || !email.includes(".")) {
+    return res.json({
+      error: "The email is Incomplete",
+    });
+  }
+  const atpos = email.indexOf("@");
+  const dotpos = email.lastIndexOf(".");
+  if (atpos < 1 || dotpos - atpos < 2) {
+    return res.json({
+      error: "The email is Incomplete",
+    });
+  }
+
+  next();
+};
+
+export { userValidator, userUpdateValidate };

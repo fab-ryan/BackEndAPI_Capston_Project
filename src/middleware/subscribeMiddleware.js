@@ -5,7 +5,9 @@ const sendUserEmail = async (req, res, next) => {
   const { mail } = config;
   const EmailFound = await subscriberModel.findOne({ email: req.body.email });
   if (EmailFound) {
-    res.status(400).json({ error: `The Email ${req.body.email}` });
+    res
+      .status(400)
+      .json({ error: `Email is already subscribed ${req.body.email}` });
   } else {
     sgMail.setApiKey(mail);
 

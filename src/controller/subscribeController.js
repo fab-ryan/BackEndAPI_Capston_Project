@@ -4,8 +4,8 @@ const postSubscriber = async (req, res) => {
     const subs = await subscriberModel.findOne({ email: req.body.email });
     if (subs) {
       res
-        .status(406)
-        .json({ message: `Email is already subscribed ${req.body.email}` });
+        .status(400)
+        .json({ error: `Email is already subscribed ${req.body.email}` });
     } else {
       const subscription = await subscriberModel.create(req.body);
       res.status(201).json({
@@ -23,13 +23,11 @@ const getAllSubscriber = async (req, res) => {
     if (allSubscriber.length < 1) {
       res.status(406).json({ error: `No subscriber Listed` });
     } else {
-      res
-        .status(200)
-        .json({
-          message: `successfully`,
-          data: allSubscriber,
-          count: allSubscriber.length,
-        });
+      res.status(200).json({
+        message: `successfully`,
+        data: allSubscriber,
+        count: allSubscriber.length,
+      });
     }
   } catch (error) {
     res.status(400).json({ error: `bad Request` });

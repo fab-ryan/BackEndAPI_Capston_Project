@@ -87,18 +87,12 @@ const getUserInfo = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const userId = req.params.id;
-    const hashPassword = bcrypt.hashSync(req.body.password, 10);
+
     if (!(await userSchema.findById(userId)))
       return res
         .status(409)
         .json({ error: `user with this not found ${userId}` });
-    const UpdateUser = await userSchema.findByIdAndUpdate(userId, {
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      email: req.body.email,
-      username: req.body.username,
-      password: hashPassword,
-    });
+    const UpdateUser = await userSchema.findByIdAndUpdate(userId, req.body);
     res.status(201).json({
       message: "User Updated well",
     });

@@ -16,6 +16,7 @@ const postAllComment = async (req, res) => {
       res.status(201).json({
         message: "New comment",
         data: BlogPost,
+        commentId: NewComment,
       });
     });
   } catch (error) {
@@ -36,7 +37,7 @@ const getAllComment = async (req, res) => {
       data: getComment.comments,
     });
   } catch (error) {
-    res.status(404).json({
+    res.status(500).json({
       error: `No Comments with this Id ${req.params.id}`,
     });
   }
@@ -51,16 +52,16 @@ const deleteComment = async (req, res) => {
       const blog = await blogModel.findById(blogId);
       blog.comments.remove(commentId);
       await blog.save();
-      res.status(200).json({
+      res.status(201).json({
         message: "comment has been deleted well",
       });
     } else {
-      res.status(400).json({
+      res.status(404).json({
         error: `no comment found with this id ${commentId}`,
       });
     }
   } catch (error) {
-    res.status(404).json({
+    res.status(500).json({
       error: "No comment found",
     });
   }

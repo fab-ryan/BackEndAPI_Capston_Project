@@ -2,17 +2,17 @@ const userValidator = (req, res, next) => {
   let { firstname, lastname, username, password, confirmpassword, email } =
     req.body;
   if (firstname == "" || !firstname) {
-    res.json({
+    return res.json({
       error: "First Name is required",
     });
   }
   if (lastname == "" || !lastname) {
-    res.json({
+    return res.json({
       error: "Last Name is required",
     });
   }
   if (username == "" || !username) {
-    res.json({
+    return res.json({
       error: "User Name is required ",
     });
   }
@@ -35,27 +35,27 @@ const userValidator = (req, res, next) => {
   }
 
   if (password == "" || !password) {
-    res.json({
+    return res.json({
       error: "Password is Required",
     });
   }
   if (confirmpassword == "" || !confirmpassword) {
-    res.json({
+    return res.json({
       error: "Confirm Password is Required",
     });
   }
   if (password.length < 8) {
-    res.json({
+    return res.json({
       error: "password must have 8 characters",
     });
   }
   if (confirmpassword.length < 8) {
-    res.json({
+    return res.json({
       error: "confirm password must have 8 characters",
     });
   }
   if (password != confirmpassword) {
-    res.json({
+    return res.json({
       error: "password does not match",
     });
   }
@@ -66,17 +66,17 @@ const userUpdateValidate = (req, res, next) => {
   let { firstname, lastname, username, password, confirmpassword, email } =
     req.body;
   if (firstname == "" || !firstname) {
-    res.json({
+   return res.json({
       error: "First Name is required",
     });
   }
   if (lastname == "" || !lastname) {
-    res.json({
+   return res.json({
       error: "Last Name is required",
     });
   }
   if (username == "" || !username) {
-    res.json({
+   return res.json({
       error: "User Name is required ",
     });
   }

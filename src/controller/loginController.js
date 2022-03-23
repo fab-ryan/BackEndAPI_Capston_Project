@@ -9,7 +9,6 @@ const LoginUser = async (req, res) => {
     if (userFound) {
       bcrypt.compare(password, userFound.password, function (error, user) {
         if (error) {
-          console.log(error);
           res.status(500).json({
             error: " Internal Server ",
           });
@@ -40,6 +39,7 @@ const LoginUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: "Internal Server error",
+      error,
     });
   }
 };

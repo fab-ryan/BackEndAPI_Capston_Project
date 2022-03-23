@@ -92,7 +92,7 @@ const updateUser = async (req, res) => {
 
     if (!(await userSchema.findById(userId)))
       return res
-        .status(409)
+        .status(404)
         .json({ error: `user with this not found ${userId}` });
     const UpdateUser = await userSchema.findByIdAndUpdate(userId, req.body);
     res.status(201).json({

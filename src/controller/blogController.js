@@ -62,7 +62,7 @@ const getOneBlog = async (req, res) => {
     const blogId = req.params.id;
     const OneBlog = await blogeModel.findById(blogId);
     if (!OneBlog)
-      return res.status(408).json({ error: `blog with this id ${blogId}` });
+      return res.status(404).json({ error: `blog with this id ${blogId}` });
     res.status(200).json({
       message: "one Blog",
       data: OneBlog,

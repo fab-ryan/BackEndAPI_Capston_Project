@@ -10,6 +10,7 @@ const postSubscriber = async (req, res) => {
       const subscription = await subscriberModel.create(req.body);
       res.status(201).json({
         message: `subscribed well`,
+        data: subscription,
       });
     }
   } catch (error) {

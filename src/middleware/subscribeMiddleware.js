@@ -16,7 +16,7 @@ const sendUserEmail = async (req, res, next) => {
       from: "royalfabrice1234@gmail.com",
       subject: "Subscribe account",
       text: "You have subscribe to my blog thank you will receive every notification on new blog",
-      html: "<strong>You can view my blog Here<a href='https://fab-ryan.github.io/Fabrice-Capstone-Project'>Blog</a></stong>",
+      html: "<strong>You can view my blog Here<a href='https://ryanfab.netlify.app/'>Blog</a></stong>",
     };
     sgMail
       .send(mailOption)

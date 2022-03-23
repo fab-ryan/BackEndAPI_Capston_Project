@@ -3,6 +3,7 @@ import commentModel from "../model/commentModel.js";
 import slug from "slug";
 import userModel from "../model/userModel.js";
 import { fileUpload } from "../middleware/mutler.js";
+import sendNotification from "../middleware/notification.js";
 //  this is the comment
 const postAllBlog = async (req, res) => {
   try {
@@ -22,6 +23,7 @@ const postAllBlog = async (req, res) => {
         slug: slug(ArticleTitle),
         author: user.username,
       });
+      await sendNotification(blogs.id);
       res.status(201).json({
         message: "Blog Has been saved succefull",
         data: blogs,

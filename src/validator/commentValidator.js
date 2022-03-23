@@ -1,17 +1,17 @@
 const commentValidator = (req, res, next) => {
   let { fullname, email, comment } = req.body;
   if (fullname == "" || !fullname) {
-    return res.status(204).json({
+    return res.status(409).json({
       error: "full Name required",
     });
   }
   if (email == "" || !email) {
-    return res.status(204).json({
+    return res.status(409).json({
       error: "email is required",
     });
   }
   if (!email.includes("@") || !email.includes(".")) {
-    return res.status(204).json({
+    return res.status(409).json({
       error: "The email is Incomplete",
     });
   }
@@ -23,7 +23,7 @@ const commentValidator = (req, res, next) => {
     });
   }
   if (comment == "" || !comment) {
-    return res.status(204).json({
+    return res.status(409).json({
       error: "comment is required",
     });
   }

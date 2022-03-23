@@ -26,7 +26,7 @@ describe("Blog test", () => {
           comment: "Hello this is the testing",
         })
         .set("Authorization", "Bearer " + token);
-      expect(res.status).toBe(204);
+      expect(res.status).toBe(409);
     }, 50000);
     it("mail Validation", async () => {
       res = await request(app)
@@ -37,7 +37,7 @@ describe("Blog test", () => {
           email: "",
           comment: "Hello this is the testing",
         });
-      expect(res.status).toBe(204);
+      expect(res.status).toBe(409);
     }, 50000);
     it("mail @ messing Validation", async () => {
       res = await request(app)
@@ -48,7 +48,7 @@ describe("Blog test", () => {
           email: "testing",
           comment: "Hello this is the testing",
         });
-      expect(res.status).toBe(204);
+      expect(res.status).toBe(409);
     }, 50000);
     it("mail index of @ . in wrong place messing Validation", async () => {
       res = await request(app)
@@ -66,7 +66,7 @@ describe("Blog test", () => {
         .post("/api/v1/blog/623994388fc027c10adf5a60/comment")
         .set("Authorization", "Bearer " + token)
         .send({ fullname: "testing", email: "testing@gmil.com", comment: "" });
-      expect(res.status).toBe(204);
+      expect(res.status).toBe(409);
     }, 50000);
   });
   describe("ADD COMMENT TO BLOG", () => {

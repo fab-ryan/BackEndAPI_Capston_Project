@@ -33,7 +33,7 @@ const postAllMessage = async (req, res) => {
       date: Date.now(),
     });
     res.status(201).json({
-      message: "Data saved successfully",
+      message: "Message sent successfully",
       data: SavedData,
     });
   } catch (error) {

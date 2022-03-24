@@ -14,7 +14,7 @@ To get started with service. Make sure the bellow tools are installed on your de
 
 ## Running the app
 
-- clone the [repo]()
+- clone the [repo](https://github.com/fab-ryan/BackEndAPI_Capston_Project.git)
 
 - install modules you can use `npm`
 

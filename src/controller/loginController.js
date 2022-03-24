@@ -27,7 +27,7 @@ const LoginUser = async (req, res) => {
           });
         } else {
           res.status(401).json({
-            error: `Incorrect Password`,
+            error: `Incorrect Email or Password`,
           });
         }
       });

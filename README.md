@@ -32,7 +32,6 @@ $ npm install
 ### starting the dev server
 
 ```
-$ yarn start:dev
-or
-$ npm run start:dev
+
+$ npm run dev
 ```

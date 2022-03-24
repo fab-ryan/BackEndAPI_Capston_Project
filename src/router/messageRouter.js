@@ -12,7 +12,7 @@ import { verifyToken, IsAdmin } from "../middleware/is_auth.js";
 const router = express.Router();
 
 router.get("/messages", verifyToken, IsAdmin, getAllMessage);
-router.post("/message", verifyToken, messageValidator, postAllMessage);
+router.post("/message", messageValidator, postAllMessage);
 router.get("/message/:id", verifyToken, IsAdmin, getAMessage);
 router.patch("/message/:id", verifyToken, messageValidator, updateMessage);
 router.delete("/message/:id", verifyToken, IsAdmin, deleteMessage);

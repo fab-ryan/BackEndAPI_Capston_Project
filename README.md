@@ -16,11 +16,10 @@ To get started with service. Make sure the bellow tools are installed on your de
 
 - clone the [repo]()
 
-- install modules you can use either `yarn` or `npm`
+- install modules you can use `npm`
 
 ```sh
-$ yarn install
-or
+
 $ npm install
 ```
 
